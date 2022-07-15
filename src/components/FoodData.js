@@ -6,6 +6,7 @@ import React from 'react';
     addFood: () => {},
     removeFood: () => {},
     deleteFood: () => {},
+    clearFood: () => {}
  })
 
 export default FoodData

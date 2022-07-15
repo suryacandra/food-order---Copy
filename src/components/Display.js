@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react'
+
 import Header from './Header'
 import FoodList from './FoodList'
 import CartList from './CartList'
@@ -69,6 +70,9 @@ const foodReducer = (state, action) => {
       totalHarga: totalHarga
     }
   }
+  if(action.type === 'CLEAR'){
+    return initialFood
+  }
 
   return initialFood
 }
@@ -103,6 +107,12 @@ const Display = (props) => {
     })
   }
 
+  const clearHandler = () => {
+    dispatchFoods({
+      type: 'CLEAR'
+    })
+  }
+
   const cartHandler = () => {
     setCart(item => !item)
   }
@@ -113,7 +123,8 @@ const Display = (props) => {
     totalHarga: foods.totalHarga,
     addFood: addFoodHandler,
     removeFood: removeFoodHandler,
-    deleteFood: deleteFoodHandler
+    deleteFood: deleteFoodHandler,
+    clearFood: clearHandler
   }
 
 

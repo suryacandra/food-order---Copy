@@ -2,44 +2,29 @@ import React, { useState, useEffect } from 'react'
 import Display from './components/Display'
 
 const App = () => {
-  const [foods, setFoods] = useState([
-    {
-      id: 0,
-      name: 'Pizza',
-      price: 10,
-      description: 'Pizza',
-      amount: 1,
-    },
-    {
-      id: 1,
-      name: 'Nasi Goreng',
-      price: 3,
-      description: 'Nasi digoreng',
-      amount: 1,
-    },
-    {
-      id: 2,
-      name: 'Kebab Bakar',
-      price: 6,
-      description: 'Kebab dibakar',
-      amount: 1,
-    },
-    {
-      id: 3,
-      name: 'Ayam Bakar',
-      price: 2,
-      description: 'Ayam paha dibakar',
-      amount: 1,
-    },
-    
-])
+  const [foods, setFoods] = useState([])
+
+  const fetchFood = async () => {
+    const response = await fetch('https://react-api-4f165-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json')
+    const data = await response.json()
+    let arr = []
+    for(let key in data){
+      arr.push(
+        ...data[key])
+    }
+    setFoods(arr)
+  }
+
+  useEffect(() => {
+    fetchFood()
+  }, [])
   
   return (
-      
-      <Display
-        data={foods}
-      />
-
+    <>
+    <Display
+      data={foods}
+    />
+    </>
   )
   
 }  
